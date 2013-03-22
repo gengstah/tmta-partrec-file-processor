@@ -6,12 +6,15 @@ import static org.mockito.Mockito.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import services.tman.control.TMTAFileProcessor;
+import services.tman.converter.DataTypeConverter;
 import services.tman.dao.JdbcTerritoryManagerDao;
 
 /**
@@ -22,7 +25,8 @@ import services.tman.dao.JdbcTerritoryManagerDao;
  * @since March 2013
  */
 public class TMTAFileProcessorTest {
-	private TMTAFileProcessor fileProcessor;
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	private TMTAFileProcessor tmtaFileProcessor;
 	private File mockFile;
 	private BufferedReader validTMTAFileReader;
 	private BufferedReader invalidFileDueToIncorrectDataMarkerReader;
@@ -35,16 +39,21 @@ public class TMTAFileProcessorTest {
 	
 	@Before
 	public void setUp() throws IOException {
-		fileProcessor = new TMTAFileProcessor();
+		tmtaFileProcessor = new TMTAFileProcessor();
+		tmtaFileProcessor.setDateFormat(DATE_FORMAT);
 		dataDictionary = mock(Properties.class);
 		
-		fileProcessor.setDao(mock(JdbcTerritoryManagerDao.class));
-		fileProcessor.setDataDictionary(dataDictionary);
-		fileProcessor.setUtil(TMTAFileProcessorUtil.getInstance());
+		tmtaFileProcessor.setDao(mock(JdbcTerritoryManagerDao.class));
+		tmtaFileProcessor.setUtil(TMANFileProcessorUtil.getInstance());
 		
 		mockFile = mock(File.class);
 		when(mockFile.getName()).thenReturn("MockFileName.CST");
 		when(dataDictionary.getProperty(anyString(), anyString())).thenReturn("STRING");
+		
+		DataTypeConverter converter = new DataTypeConverter();
+		converter.setDataDictionary(dataDictionary);
+		converter.setTableName("TMTA_CST");
+		tmtaFileProcessor.setConverter(converter);
 		
 		validTMTAFileReader = mock(BufferedReader.class);
 		invalidFileDueToIncorrectDataMarkerReader = mock(BufferedReader.class);
@@ -113,75 +122,75 @@ public class TMTAFileProcessorTest {
 	
 	@Test
 	public void testValidDataMarker() throws IOException {
-		fileProcessor.setReader(validTMTAFileReader);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(validTMTAFileReader);
+		tmtaFileProcessor.process(mockFile);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidDataMarker() throws IOException {
-		fileProcessor.setReader(invalidFileDueToIncorrectDataMarkerReader);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(invalidFileDueToIncorrectDataMarkerReader);
+		tmtaFileProcessor.process(mockFile);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidDate() throws IOException {
-		fileProcessor.setReader(invalidFileDueToIncorrectDateFormatReader);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(invalidFileDueToIncorrectDateFormatReader);
+		tmtaFileProcessor.process(mockFile);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testFileWithNoReportName() throws IOException {
-		fileProcessor.setReader(invalidFileDueToNoReportName);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(invalidFileDueToNoReportName);
+		tmtaFileProcessor.process(mockFile);
 	}
 	
 	@Test
 	public void testFileReportName() throws IOException {
-		fileProcessor.setReader(validTMTAFileReader);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(validTMTAFileReader);
+		tmtaFileProcessor.process(mockFile);
 		
-		assertEquals("\"CUSTOMERS\"", fileProcessor.getReportName());
+		assertEquals("\"CUSTOMERS\"", tmtaFileProcessor.getReportName());
 	}
 	
 	@Test
 	public void testNumberOfColumns() throws IOException {
-		fileProcessor.setReader(validTMTAFileReader);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(validTMTAFileReader);
+		tmtaFileProcessor.process(mockFile);
 		
-		assertEquals(11, fileProcessor.getColumnCount());
+		assertEquals(11, tmtaFileProcessor.getColumnCount());
 	}
 	
 	@Test
 	public void testColumnHeaderAgainstNumberOfColumns() throws IOException {
-		fileProcessor.setReader(validTMTAFileReader);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(validTMTAFileReader);
+		tmtaFileProcessor.process(mockFile);
 		
-		assertEquals(fileProcessor.getColumnCount(), fileProcessor.getColumnHeaders().size());
+		assertEquals(tmtaFileProcessor.getColumnCount(), tmtaFileProcessor.getColumnHeaders().size());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInconsistentColumnNumberAndHeaders() throws IOException {
-		fileProcessor.setReader(invalidFileDueToInconsistentNumberOfColumnsAndHeaders);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(invalidFileDueToInconsistentNumberOfColumnsAndHeaders);
+		tmtaFileProcessor.process(mockFile);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidDataMarkerOfActualData() throws IOException {
-		fileProcessor.setReader(invalidFileDueToIncorrectActualDataMarker);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(invalidFileDueToIncorrectActualDataMarker);
+		tmtaFileProcessor.process(mockFile);
 	}
 	
 	@Test
 	public void testActualDataAgainstRecordCount() throws IOException {
-		fileProcessor.setReader(validTMTAFileReader);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(validTMTAFileReader);
+		tmtaFileProcessor.process(mockFile);
 		
-		assertEquals(fileProcessor.getRecordCount(), fileProcessor.getActualDataRecordList().size());
+		assertEquals(tmtaFileProcessor.getRecordCount(), tmtaFileProcessor.getActualDataRecordList().size());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInconsistentRecordCountAndActualData() throws IOException {
-		fileProcessor.setReader(invalidFileDueToInconsistentRecordCountAndActualData);
-		fileProcessor.process(mockFile);
+		tmtaFileProcessor.setReader(invalidFileDueToInconsistentRecordCountAndActualData);
+		tmtaFileProcessor.process(mockFile);
 	}
 }

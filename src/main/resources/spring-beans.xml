@@ -12,6 +12,17 @@
 			default-init-method="init"
 			default-destroy-method="destroy">
 	
+	<!-- Table name resolvers -->
+    <bean id="partRecReportTableNameResolver" class="services.tman.resolver.PartRecReportTableNameResolver">
+    	<property name="filenameReportTableMapping" ref="partrecFilenameReportTableMapping" />
+    </bean>
+    
+    <bean id="tmtaReportTableNameResolver" class="services.tman.resolver.TMTAReportTableNameResolver">
+    	<property name="filenameReportTableMapping" ref="tmtaFilenameReportTableMapping" />
+    </bean>
+    
+    <import resource="spring-mappings.xml" />
+	
 	<!-- JDBC -->
 	<context:property-placeholder location="jdbc.properties"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -26,34 +37,129 @@
     	<property name="schemaName" value="TM2STG" />
     </bean>
     
-    <bean id="fileProcessorUtil" class="services.tman.control.TMTAFileProcessorUtil" factory-method="getInstance">
-    	<property name="pmDataTable" value="TMTA_PMD" />
-    	<property name="ecDataTable" value="TMTA_ECD" />
-    	<property name="machineTable" value="TMTA_MCH" />
-    	<property name="customerTable" value="TMTA_CST" />
+    <bean id="fileProcessorUtil" class="services.tman.control.TMANFileProcessorUtil" factory-method="getInstance">
+    	<property name="tableNameResolverFactory" ref="tableNameResolverFactory" />
+    </bean>
+    
+    <bean id="tableNameResolverFactory" class="services.tman.resolver.TMANReportTableNameResolverFactory" factory-method="getInstance">
+    	<property name="fileExtensionResolverMapping" ref="fileExtensionResolverMapping" />
+    </bean>
+    
+    <bean id="converter" class="services.tman.converter.DataTypeConverter">
+    	<property name="dataDictionary" ref="dataDictionary" />
+    	<property name="dateFormat" ref="dateFormat" />
+    	<property name="dateEditor">
+    		<bean class="org.springframework.beans.propertyeditors.CustomDateEditor">
+    			<constructor-arg index="0" ref="dateFormat" />
+    			<constructor-arg index="1" value="true" />
+    		</bean>
+    	</property>
+    	<property name="dateEditorOverrides">
+    		<map>
+    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMONTHLY_DISB_AND_RETURNS_IMR" />
+    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.PROCESS_DATE" value-ref="customDateEditorOverrideForMONTHLY_DISB_AND_RETURNS_IMR" />
+    		</map>
+    	</property>
+    	<property name="numberFormatOverrides">
+    		<map>
+    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.PRICE" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />			
+    		</map>
+    	</property>
+    </bean>
+    
+    <bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg index="0" value="yyyy-MM-dd" />
+	</bean>
+	
+	<bean id="customDateEditorOverrideForMONTHLY_DISB_AND_RETURNS_IMR" class="org.springframework.beans.propertyeditors.CustomDateEditor">
+		<constructor-arg index="0">
+			<bean class="java.text.SimpleDateFormat">
+				<constructor-arg index="0" value="MMddyy" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg index="1" value="true" />
+	</bean>
+	
+	<bean id="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR" class="java.text.DecimalFormat">
+		<constructor-arg index="0" value="#,###.###" />
+	</bean>
+	
+	<bean id="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" class="java.text.NumberFormat" factory-method="getCurrencyInstance">
+		<constructor-arg index="0">
+			<util:constant static-field="java.util.Locale.US"/>
+		</constructor-arg>
+	</bean>
+    
+    <!-- TMAN File processors -->
+    
+    <bean id="tmtaFileProcessor" class="services.tman.control.TMTAFileProcessor">
+    	<property name="dao" ref="jdbcTerritoryManagerDao" />
+    	<property name="util" ref="fileProcessorUtil" />
+    	<property name="processedFilesDirectory" value="C:\TM2_TMTA_Files\TMTA_Processed_Files" />
+    	<property name="invalidFilesDirectory" value="C:\TM2_TMTA_Files\TMTA_Invalid_Files" />
+    	<property name="inputDirectories">
+    		<list>
+    			<value>C:\\TMTA_flat_files</value>
+    			<value>C:\\TMTA_Canada_Input</value>
+    		</list>
+    	</property>
+    	<property name="dateFormat">
+    		<bean class="java.text.SimpleDateFormat">
+    			<constructor-arg value="yyyy-MM-dd" />
+    		</bean>
+    	</property>
+    	<property name="converter" ref="converter" />
+    </bean>
+    
+    <bean id="partrecFileProcessor" class="services.tman.control.PartRecFileProcessor">
+    	<property name="dao" ref="jdbcTerritoryManagerDao" />
+    	<property name="util" ref="fileProcessorUtil" />
+    	<property name="processedFilesDirectory" value="C:\TM2_PartRec_Files\PartRec_Processed_Files" />
+    	<property name="invalidFilesDirectory" value="C:\TM2_PartRec_Files\PartRec_Invalid_Files" />
+    	<property name="inputDirectories">
+    		<list>
+    			<value>C:\\PartRec_Input</value>
+    			<value>C:\\PartRec_Canada_Input</value>
+    		</list>
+    	</property>
+    	<property name="dateFormat">
+    		<bean class="java.text.SimpleDateFormat">
+    			<constructor-arg value="MMddyyy" />
+    		</bean>
+    	</property>
+    	<property name="converter" ref="converter" />
+    	<property name="columnHeaderToColumnNameMapping" ref="columnHeaderToColumnNameMapping" />
+    	<property name="userActions"> <map></map> </property>
     </bean>
     
     <!-- Quartz -->
     <util:properties id="dataDictionary" location="datadictionary.properties" />
-    <bean id="fileProcessingTask" class="services.tman.control.TMTAFileProcessor">
-    	<property name="dao" ref="jdbcTerritoryManagerDao" />
-    	<property name="dataDictionary" ref="dataDictionary" />
-    	<property name="util" ref="fileProcessorUtil" />
-    </bean>
-	
 	<bean name="flatFileProcessorJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass" value="services.tman.job.FlatFileProcessorJob" />
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="processor" value-ref="fileProcessingTask" />
-				<entry key="directories">
+				<entry key="processors">
 					<list>
-						<value>C:\\TMTA_flat_files</value>
-						<value>C:\\TMTA_Canada_Input</value>
+						<ref bean="tmtaFileProcessor" />
+						<ref bean="partrecFileProcessor" />
 					</list>
 				</entry>
-				<entry key="processedFilesDirectory" value="C:\TM2_TMTA_Files\TMTA_Processed_Files" />
-				<entry key="invalidFilesDirectory" value="C:\TM2_TMTA_Files\TMTA_Invalid_Files" />
 			</map>
 		</property>
 	</bean>

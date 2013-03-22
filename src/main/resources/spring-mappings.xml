@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	
+	<util:map id="partrecFilenameReportTableMapping">
+		<description>File Name to Database Table Mapping</description>
+		<entry key="MONTHLY ACCOUNT CODE CHANGE.IMR" value="MONTHLY_ACCOUNT_CODE_CHANGE_IMR" />
+		<entry key="MONTHLY DISBURSEMENTS AND RETURNS.IMR" value="MONTHLY_DISB_AND_RETURNS_IMR" />
+		<entry key="MONTHLY MACHINE TYPE REPORT.IMR" value="MONTHLY_MACHINE_TYPE_REPORT_IMR" />
+		<entry key="MONTHLY PRICE CHANGE.IMR" value="MONTHLY_PRICE_CHANGE_IMR" />
+		<entry key="MONTHLY QUANTITY ADJUSTMENT.IMR" value="MONTHLY_QUANTITY_ADJUSTMENT_IMR" />
+		<entry key="MONTHLY RECEIPT ACTIVITY.IMR" value="MONTHLY_RECEIPT_ACTIVITY_IMR" />
+		<entry key="MONTHLY RECOMMENDED ADDS.IMR" value="MONTHLY_RECCOMENDED_ADDS_IMR" />
+		<entry key="MONTHLY RECOMMENDED RETURNS.IMR" value="MONTHLY_RECCOMENDED_RETURNS_IMR" />
+		<entry key="MONTHLY STOCK STATUS.IMR" value="MONTHLY_STOCK_STATUS_IMR" />
+		<entry key="MONTHLY SUBSTITUTION.IMR" value="MONTHLY_SUBSTITUTION_IMR" />
+		<entry key="MONTHLY PARTS DISPOSITION.IMR" value="MONTHLY_PARTS_DISPOSITION_IMR" />
+		<entry key="MONTHLY MINUS ON HAND.IMR" value="MONTHLY_MINUS_ON_HAND_IMR" />
+		<entry key="WEEKLY MINUS ON HAND.IMR" value="WEEKLY_MINUS_ON_HAND_IMR" />
+		<entry key="WEEKLY RECOMMENDED ADDS.IMR" value="WEEKLY_RECCOMENDED_ADD_IMR" />
+		<entry key="WEEKLY RECOMMENDED RETURNS.IMR" value="WEEKLY_RECOMMENDED_RETURNS_IMR" />
+		<entry key="WEEKLY DISBURSEMENTS AND RETURNS.IMR" value="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR" />
+		<entry key="WEEKLY RECEIPT ACTIVITY.IMR" value="WEEKLY_RECEIPT_ACTIVITY_IMR" />
+		<entry key="MONTHLY AGED RETURNS.UPR" value="MONTHLY_AGED_RETURNS_UPR" />
+		<entry key="MONTHLY ANTICIPATED RETURNS.UPR" value="MONTHLY_ANTICIPATED_RETURNS_UPR" />
+		<entry key="MONTHLY POTENTIAL RETURNS.UPR" value="MONTHLY_POTENTIAL_RETURNS_UPR" />
+		<entry key="WEEKLY POTENTIAL RETURNS UPR.UPR" value="WEEKLY_POTENTIAL_RETURNS_UPR" />
+		<entry key="BRANCH MANAGER SUMMARY.ASL" value="BRANCH_MANAGER_SUMMARY_ASL" />
+		<entry key="BRANCH MANAGER TOTALS.ASL" value="BRANCH_MANAGER_TOTALS_ASL" />
+		<entry key="FIELD MANAGER SUMMARY.ASL" value="FIELD_MANAGER_SUMMARY_ASL" />
+		<entry key="TERRITORY DETAIL.ASL" value="TERRITORY_DETAIL_ASL" />
+		<entry key="REGULAR COUNTS.PHY" value="REGULAR_COUNTS_PHY" />
+		<entry key="REGULAR RECOUNTS.PHY" value="REGULAR_RECOUNTS_PHY" />
+		<entry key="REGULAR VIW.VIW" value="REGULAR_VIW_VIW" />
+		<entry key="NBO VIW.VIW" value="NBO_VIW_VIW" />
+		<entry key="REGULAR ADJUSTMENT REPORT SUMMARY.RIR" value="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR" />
+		<entry key="REGULAR ADJUSTMENT REPORT DETAIL.RIR" value="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR" />
+		<entry key="NBO COUNTS.NBO" value="NBO_COUNTS_NBO" />
+		<entry key="NBO RECOUNTS.NBO" value="NBO_RECOUNTS_NBO" />
+		<entry key="REGULAR ADJUSTMENT REPORT SUMMARY.NIR" value="REGULAR_ADJUSTMENT_REPORT_SUMMARY_NIR" />
+		<entry key="REGULAR ADJUSTMENT REPORT DETAIL.NIR" value="REGULAR_ADJUSTMENT_REPORT_DETAIL_NIR" />
+	</util:map>
+	
+	<util:map id="tmtaFilenameReportTableMapping">
+    	<description>File Name to Database Table Mapping</description>
+		<entry key="CST" value="TMTA_CST" />
+		<entry key="ECD" value="TMTA_ECD" />
+		<entry key="MCH" value="TMTA_MCH" />
+		<entry key="PMD" value="TMTA_PMD" />
+    </util:map>
+	
+	<util:map id="fileExtensionResolverMapping">
+    	<description>File Extension to Table Name Resolver Mapping</description>
+  		<entry key="CST" value-ref="tmtaReportTableNameResolver" />
+  		<entry key="MCH" value-ref="tmtaReportTableNameResolver" />
+  		<entry key="PMD" value-ref="tmtaReportTableNameResolver" />
+  		<entry key="ECD" value-ref="tmtaReportTableNameResolver" />
+  		<entry key="IMR" value-ref="partRecReportTableNameResolver" />
+  		<entry key="UPR" value-ref="partRecReportTableNameResolver" />
+  		<entry key="ASL" value-ref="partRecReportTableNameResolver" />
+  		<entry key="PHY" value-ref="partRecReportTableNameResolver" />
+  		<entry key="VIW" value-ref="partRecReportTableNameResolver" />
+  		<entry key="RIR" value-ref="partRecReportTableNameResolver" />
+  		<entry key="NBO" value-ref="partRecReportTableNameResolver" />
+  		<entry key="NIR" value-ref="partRecReportTableNameResolver" />
+    </util:map>
+    
+    <util:map id="columnHeaderToColumnNameMapping">
+    	<description>Column Header to Database Column Name Mapping</description>
+    	<entry key="BRANCH_MANAGER_SUMMARY_ASL.Data Marker" value="DATA_MARKER" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Country" value="COUNTRY" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Branch" value="BRANCH" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Territory" value="TERRITORY" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Out Loc" value="OUT_LOC" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Serial" value="SERIAL" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Total Inv $" value="TOTAL_INV_$" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.A S L Lines" value="ASL_LINES" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.A S L $" value="ASL_$" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.A S L % Of Inv" value="A_S_L_%_OF_INV" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 1 Yr Lines" value="AGED_1_YR_LINES" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 1 Yr $" value="AGED_1_YR_$" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 1 Yr %" value="AGED_1_YR_%" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 2 Yr Lines" value="AGED_2_YR_LINES" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 2 Yr $" value="AGED_2_YR_$" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 2 Yr %" value="AGED_2_YR_%" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 3 Yr Lines" value="AGED_3_YR_LINES" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 3 Yr $" value="AGED_3_YR_$" />
+		<entry key="BRANCH_MANAGER_SUMMARY_ASL.Aged 3 Yr %" value="AGED_3_YR_%" />
+
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Data Marker" value="DATA_MARKER" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Country" value="COUNTRY" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Branch" value="BRANCH" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Territory" value="TERRITORY" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Out Loc" value="OUT_LOC" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Serial" value="SERIAL" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Territory1" value="TERRITORY1" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Total Inv $" value="TOTAL_INV_$" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.A S L Lines" value="ASL_LINES" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.A S L $" value="ASL_$" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.A S L % Of Inv" value="A_S_L_%_OF_INV" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 1 Yr Lines" value="AGED_1_YR_LINES" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 1 Yr $" value="AGED_1_YR_$" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 1 Yr %" value="AGED_1_YR_%" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 2 Yr Lines" value="AGED_2_YR_LINES" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 2 Yr $" value="AGED_2_YR_$" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 2 Yr %" value="AGED_2_YR_%" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 3 Yr Lines" value="AGED_3_YR_LINES" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 3 Yr $" value="AGED_3_YR_$" />
+		<entry key="BRANCH_MANAGER_TOTALS_ASL.Aged 3 Yr %" value="AGED_3_YR_%" />
+
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Data Marker" value="DATA_MARKER" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Country" value="COUNTRY" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Branch" value="BRANCH" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Territory" value="TERRITORY" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Out Loc" value="OUT_LOC" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Serial" value="SERIAL" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Territory1" value="TERRITORY1" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Total Inv $" value="TOTAL_INV_$" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.A S L Lines" value="ASL_LINES" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.A S L $" value="ASL_$" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.A S L % Of Inv" value="A_S_L_%_OF_INV" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 1 Yr Lines" value="AGED_1_YR_LINES" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 1 Yr $" value="AGED_1_YR_$" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 1 Yr %" value="AGED_1_YR_%" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 2 Yr Lines" value="AGED_2_YR_LINES" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 2 Yr $" value="AGED_2_YR_$" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 2 Yr %" value="AGED_2_YR_%" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 3 Yr Lines" value="AGED_3_YR_LINES" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 3 Yr $" value="AGED_3_YR_$" />
+		<entry key="FIELD_MANAGER_SUMMARY_ASL.Aged 3 Yr %" value="AGED_3_YR_%" />
+
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Part Name" value="PARTNAME" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Account Code" value="ACCOUNT_CODE" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Activity Type" value="ACTIVITY_TYPE" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.Quantity" value="QUANTITY" />
+		<entry key="MONTHLY_ACCOUNT_CODE_CHANGE_IMR.New Internal Value" value="NEW_INTERNAL_VALUE" />
+
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Part Name" value="PART_NAME" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.PRF#" value="PRF#" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.CPN#" value="CPN#" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.QSAR Number" value="QSAR_NUMBER" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Machine Type" value="MACHINE_TYPE" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Machine Serial" value="MACHINE_SERIAL" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.APC Code" value="APC_CODE" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.UPR Status" value="UPR_STATUS" />
+		<entry key="MONTHLY_AGED_RETURNS_UPR.EX" value="EX" />
+
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Part Name" value="PART_NAME" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.PRF#" value="PRF#" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.CPN#" value="CPN#" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.QSAR Number" value="QSAR_NUMBER" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Machine Type" value="MACHINE_TYPE" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Machine Serial" value="MACHINE_SERIAL" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.APC Code" value="APC_CODE" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.UPR Status" value="UPR_STATUS" />
+		<entry key="MONTHLY_ANTICIPATED_RETURNS_UPR.EX" value="EX" />
+
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Order Number" value="ORDER_NUMBER" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Quantity" value="QUANTITY" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Processed Date" value="PROCESS_DATE" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Rec B/O" value="&quot;REC_B/O&quot;" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Rec O/L" value="&quot;REC_O/L&quot;" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Price" value="PRICE" />
+
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Customer Number" value="CUSTOMER_NUMBER" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Machine Type" value="MACHINE_TYPE" />
+		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Machine Type Count" value="MACHINE_TYPE_COUNT" />
+
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Part Name" value="PART_NAME" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.QTOH" value="QTQH" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Total Value" value="TOTAL_VALUE" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Order Number" value="ORDER_NUMBER" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Transaction Identifier" value="TRANSACTION_IDENTIFIER" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Qty" value="QTY" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Receiving B/O" value="RECEIVING_B/O" />
+		<entry key="MONTHLY_MINUS_ON_HAND_IMR.Receiving O/L" value="RECEIVING_O/L" />
+
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Quantity On Hand" value="QUANTITY_ON_HAND" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Disposition" value="DISPOSITION" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Code" value="CODE" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Hazardous" value="HAZARDOUS" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.UPR" value="UPR" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Desc" value="DESC" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.SubPN" value="SUBPN" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.Mach" value="MACH" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.CYCLE" value="CYCLE" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.CYC Date" value="CYC_DATE" />
+		<entry key="MONTHLY_PARTS_DISPOSITION_IMR.APC" value="APC" />
+
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Part Name" value="PART_NAME" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.PRF#" value="PRF#" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.CPN#" value="CPN#" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.QSAR Number" value="QSAR_NUMBER" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Machine Type" value="MACHINE_TYPE" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Machine Serial" value="MACHINE_SERIAL" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.APC Code" value="APC_CODE" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.UPR Status" value="UPR_STATUS" />
+		<entry key="MONTHLY_POTENTIAL_RETURNS_UPR.EX" value="EX" />
+
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Part Name" value="PART_NAME" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Quantity" value="QUANTITY" />
+		<entry key="MONTHLY_PRICE_CHANGE_IMR.Internal Value Up" value="INTERNAL_VALUE_UP" />
+
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Part Name" value="PARTNAME" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.QTOH" value="QTQH" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Total Value" value="TOTAL_VALUE" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Order Number" value="ORDER_NO" />
+		<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.Trans Date" value="TRANS_DATE" />
+
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Order Number" value="ORDER_NUMBER" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Quantity" value="QUANTITY" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Process Date" value="PROCESS_DATE" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Receiving B/O" value="RECEIVING_B/O" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Receiving O/L" value="RECEIVING_O/L" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.Unit Price" value="UNIT_PRICE" />
+		<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.SR Serial" value="SR_SERIAL" />
+
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Part Name" value="PARTNAME" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Cycle" value="CYCLE" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Rec. Add Qty" value="REC_ADD_QTY" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.RSP" value="RSP" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.RSL" value="RSL" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.ASL" value="ASL" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.QTOH" value="QTQH" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Date Last Demand" value="DATE_LAST_DEMAND" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Date Of Birth" value="DATE_OF_BIRTH" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Internal Value Up" value="INTERNAL_VALUE_UP" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.Machine Type Supported" value="MACHINE_TYPE_SUPPORTED" />
+		<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.R/G" value="R/G" />
+
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Part Name" value="PARTNAME" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Cycle" value="CYCLE" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Rec.Retn Qty" value="REC_RETN_QTY" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.RSP" value="RSP" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.RSL" value="RSL" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.ASL" value="ASL" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.QTOH" value="QTQH" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Date Last Demand" value="DATE_LAST_DEMAND" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Date Of Birth" value="DATE_OF_BIRTH" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Internal Value Up" value="INTERNAL_VALUE_UP" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Machine Type Supported" value="MACHINE_TYPE_SUPPORTED" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Sub Part#" value="SUB_PART#" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.HAZ INDIC" value="HAZ_INDIC" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.MSDS IND" value="MSDS_IND" />
+
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.APC Code" value="APC_CODE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.UPR Indicator" value="UPR_INDICATOR" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Part Name" value="PART_NAME" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Activity Type" value="ACTIVITY_TYPE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Sub Part Numb" value="SUB_PART_NUMBER" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.QTOH" value="QTQH" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.QTOO" value="QTOO" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Min Spare" value="MIN_SPARE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.RSL" value="RSL" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.ASL" value="ASL" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Trans. Type" value="TRANS_TYPE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Date Last Activity" value="DATE_LAST_ACTIVITY" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Date Last Demand" value="DATE_LAST_DEMAND" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Mach Type" value="MACH_TYPE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Int Value" value="INT_VALUE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Seq. #" value="SEQ_#" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.HAZ" value="HAZ" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.MSDS" value="MSDS" />
+
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Country" value="COUNTRY" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Branch" value="BRANCH" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Territory" value="TERRITORY" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Serial" value="SERIAL" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Part Name" value="PART_NAME" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_SUBSTITUTION_IMR.Sub Part Number" value="SUB_PART_NUMBER" />
+
+		<entry key="NBO_COUNTS_NBO.Data Marker" value="DATA_MARKER" />
+		<entry key="NBO_COUNTS_NBO.Country" value="COUNTRY" />
+		<entry key="NBO_COUNTS_NBO.Branch" value="BRANCH" />
+		<entry key="NBO_COUNTS_NBO.Territory" value="TERRITORY" />
+		<entry key="NBO_COUNTS_NBO.Out Loc" value="OUT_LOC" />
+		<entry key="NBO_COUNTS_NBO.Serial" value="SERIAL" />
+		<entry key="NBO_COUNTS_NBO.Control Number" value="CONTROL_NUMBER" />
+		<entry key="NBO_COUNTS_NBO.Stock Loc" value="STOCK_LOC" />
+		<entry key="NBO_COUNTS_NBO.Part Name" value="PART_NAME" />
+		<entry key="NBO_COUNTS_NBO.Part Number" value="PART_NUMBER" />
+		<entry key="NBO_COUNTS_NBO.PI Date" value="PI_DATE" />
+		<entry key="NBO_COUNTS_NBO.APC Code" value="APC_CODE" />
+		<entry key="NBO_COUNTS_NBO.Count Code" value="COUNT_CODE" />
+
+		<entry key="NBO_RECOUNTS_NBO.Data Marker" value="DATA_MARKER" />
+		<entry key="NBO_RECOUNTS_NBO.Country" value="COUNTRY" />
+		<entry key="NBO_RECOUNTS_NBO.Branch" value="BRANCH" />
+		<entry key="NBO_RECOUNTS_NBO.Territory" value="TERRITORY" />
+		<entry key="NBO_RECOUNTS_NBO.Out Loc" value="OUT_LOC" />
+		<entry key="NBO_RECOUNTS_NBO.Serial" value="SERIAL" />
+		<entry key="NBO_RECOUNTS_NBO.Control Number" value="CONTROL_NUMBER" />
+		<entry key="NBO_RECOUNTS_NBO.Stock Loc" value="STOCK_LOC" />
+		<entry key="NBO_RECOUNTS_NBO.Part Name" value="PART_NAME" />
+		<entry key="NBO_RECOUNTS_NBO.Part Number" value="PART_NUMBER" />
+		<entry key="NBO_RECOUNTS_NBO.Recount Date" value="RECOUNT_DATE" />
+		<entry key="NBO_RECOUNTS_NBO.APC Code" value="APC_CODE" />
+		<entry key="NBO_RECOUNTS_NBO.Count Code" value="COUNT_CODE" />
+
+		<entry key="NBO_VIW_VIW.Data Marker" value="DATA_MARKER" />
+		<entry key="NBO_VIW_VIW.Country" value="COUNTRY" />
+		<entry key="NBO_VIW_VIW.Branch" value="BRANCH" />
+		<entry key="NBO_VIW_VIW.Territory" value="TERRITORY" />
+		<entry key="NBO_VIW_VIW.Out Loc" value="OUT_LOC" />
+		<entry key="NBO_VIW_VIW.Serial Number" value="SERIAL_NUMBER" />
+		<entry key="NBO_VIW_VIW.Part Number" value="PART_NUMBER" />
+		<entry key="NBO_VIW_VIW.Stock Loc" value="STOCK_LOC" />
+		<entry key="NBO_VIW_VIW.Part Name" value="PART_NAME" />
+		<entry key="NBO_VIW_VIW.APC Code" value="APC_CODE" />
+		<entry key="NBO_VIW_VIW.PI StartDate" value="PI_STARTDATE" />
+		<entry key="NBO_VIW_VIW.OLI Qty" value="OLI_QTY" />
+		<entry key="NBO_VIW_VIW.PHYS Qty" value="PHYS_QTY" />
+		<entry key="NBO_VIW_VIW.Variance" value="VARIANCE" />
+		<entry key="NBO_VIW_VIW.Unit Price" value="UNIT_PRICE" />
+		<entry key="NBO_VIW_VIW.Activity Sequence #" value="ACTIVITY_SEQUENCE_#" />
+		<entry key="NBO_VIW_VIW.Qty" value="QTY" />
+		<entry key="NBO_VIW_VIW.Order Number" value="ORDER_NUMBER" />
+		<entry key="NBO_VIW_VIW.ShipB/O" value="SHIP_B/O" />
+		<entry key="NBO_VIW_VIW.Ship O/L" value="SHIP_O/L" />
+		<entry key="NBO_VIW_VIW.Rec B/O" value="REC_B/O" />
+		<entry key="NBO_VIW_VIW.Rec O/L" value="REC_O/L" />
+		<entry key="NBO_VIW_VIW.Trans Date" value="TRANS_DATE" />
+		<entry key="NBO_VIW_VIW.Trans Code" value="TRANS_CODE" />
+		<entry key="NBO_VIW_VIW.Trans Type" value="TRANS_TYPE" />
+		<entry key="NBO_VIW_VIW.FNF" value="FNF" />
+		<entry key="NBO_VIW_VIW.EMCD" value="EMCD" />
+
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Data Marker" value="DATA_MARKER" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Country" value="COUNTRY" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Branch" value="BRANCH" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Territory" value="TERRITORY" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Out Loc" value="OUT_LOC" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Serial" value="SERIAL" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Count Document Number" value="COUNT_DOCUMENT_NUMBER" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Part Number" value="PART_NUMBER" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Part Name" value="PART_NAME" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Variance Quantity" value="VARIANCE_QUANTITY" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Unit Price" value="UNIT_PRICE" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Extended Price" value="EXTENDED_PRICE" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Expense Impact" value="EXPENSE_IMPACT" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Excluded from GV $" value="EXCLUDED_FROM_GV_$" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.Recount Code" value="RECOUNT_CODE" />
+
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Data Marker" value="DATA_MARKER" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Country" value="COUNTRY" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Branch" value="BRANCH" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Territory" value="TERRITORY" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Out Loc" value="OUT_LOC" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Serial Number" value="SERIAL_NUMBER" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Negative P/N's" value="TOTAL_NEGATIVE_P/N'S" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Negative Dollars" value="TOTAL_NEGATIVE_DOLLARS" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Positive P/N's" value="TOTAL_POSITIVE_P/N'S" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Positive Dollars" value="TOTAL_POSITIVE_DOLLARS" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Gross Variance P/N's" value="TOTAL_GROSS_VARIANCE_P/N'S" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Gross Variance Dollar Impact" value="TOTAL_GROSS_VARIANCE_DOLLAR_IM" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Expense Impact" value="TOTAL_EXPENSE_IMPACT" />
+
+		<entry key="REGULAR_COUNTS_PHY.Data Marker" value="DATA_MARKER" />
+		<entry key="REGULAR_COUNTS_PHY.Country" value="COUNTRY" />
+		<entry key="REGULAR_COUNTS_PHY.Branch" value="BRANCH" />
+		<entry key="REGULAR_COUNTS_PHY.Territory" value="TERRITORY" />
+		<entry key="REGULAR_COUNTS_PHY.Out Loc" value="OUT_LOC" />
+		<entry key="REGULAR_COUNTS_PHY.Serial" value="SERIAL" />
+		<entry key="REGULAR_COUNTS_PHY.Control Number" value="CONTROL_NUMBER" />
+		<entry key="REGULAR_COUNTS_PHY.Stock Loc" value="STOCK_LOC" />
+		<entry key="REGULAR_COUNTS_PHY.Part Name" value="PART_NUMBER" />
+		<entry key="REGULAR_COUNTS_PHY.Part Number" value="PART_NAME" />
+		<entry key="REGULAR_COUNTS_PHY.PI Date" value="PI_DATE" />
+		<entry key="REGULAR_COUNTS_PHY.APC Code" value="APC_CODE" />
+		<entry key="REGULAR_COUNTS_PHY.Count Code" value="COUNT_CODE" />
+
+		<entry key="REGULAR_RECOUNTS_PHY.Data Marker" value="DATA_MARKER" />
+		<entry key="REGULAR_RECOUNTS_PHY.Country" value="COUNTRY" />
+		<entry key="REGULAR_RECOUNTS_PHY.Branch" value="BRANCH" />
+		<entry key="REGULAR_RECOUNTS_PHY.Territory" value="TERRITORY" />
+		<entry key="REGULAR_RECOUNTS_PHY.Out Loc" value="OUT_LOC" />
+		<entry key="REGULAR_RECOUNTS_PHY.Serial" value="SERIAL" />
+		<entry key="REGULAR_RECOUNTS_PHY.Control Number" value="CONTROL_NUMBER" />
+		<entry key="REGULAR_RECOUNTS_PHY.Stock Loc" value="STOCK_LOC" />
+		<entry key="REGULAR_RECOUNTS_PHY.Part Name" value="PART_NUMBER" />
+		<entry key="REGULAR_RECOUNTS_PHY.Part Number" value="PART_NAME" />
+		<entry key="REGULAR_RECOUNTS_PHY.Recount Date" value="RECOUNT_DATE" />
+		<entry key="REGULAR_RECOUNTS_PHY.APC Code" value="APC_CODE" />
+		<entry key="REGULAR_RECOUNTS_PHY.Count Code" value="COUNT_CODE" />
+
+		<entry key="REGULAR_VIW_VIW.Data Marker" value="DATA_MARKER" />
+		<entry key="REGULAR_VIW_VIW.Country" value="COUNTRY" />
+		<entry key="REGULAR_VIW_VIW.Branch" value="BRANCH" />
+		<entry key="REGULAR_VIW_VIW.Territory" value="TERRITORY" />
+		<entry key="REGULAR_VIW_VIW.Out Loc" value="OUT_LOC" />
+		<entry key="REGULAR_VIW_VIW.Serial Number" value="SERIAL_NUMBER" />
+		<entry key="REGULAR_VIW_VIW.Part Number" value="PART_NUMBER" />
+		<entry key="REGULAR_VIW_VIW.Stock Loc" value="STOCK_LOC" />
+		<entry key="REGULAR_VIW_VIW.Part Name" value="PART_NAME" />
+		<entry key="REGULAR_VIW_VIW.APC Code" value="APC_CODE" />
+		<entry key="REGULAR_VIW_VIW.PI StartDate" value="PI_STARTDATE" />
+		<entry key="REGULAR_VIW_VIW.OLI Qty" value="OLI_QTY" />
+		<entry key="REGULAR_VIW_VIW.PHYS Qty" value="PHYS_QTY" />
+		<entry key="REGULAR_VIW_VIW.Variance" value="VARIANCE" />
+		<entry key="REGULAR_VIW_VIW.Unit Price" value="UNIT_PRICE" />
+		<entry key="REGULAR_VIW_VIW.Activity Sequence #" value="ACTIVITY_SEQUENCE_#" />
+		<entry key="REGULAR_VIW_VIW.Qty" value="QTY" />
+		<entry key="REGULAR_VIW_VIW.Order Number" value="ORDER_NUMBER" />
+		<entry key="REGULAR_VIW_VIW.Ship B/O" value="SHIP_B/O" />
+		<entry key="REGULAR_VIW_VIW.Ship O/L" value="SHIP_O/L" />
+		<entry key="REGULAR_VIW_VIW.Rec B/O" value="REC_B/O" />
+		<entry key="REGULAR_VIW_VIW.Rec O/L" value="REC_O/L" />
+		<entry key="REGULAR_VIW_VIW.Trans Date" value="TRANS_DATE" />
+		<entry key="REGULAR_VIW_VIW.Trans Code" value="TRANS_CODE" />
+		<entry key="REGULAR_VIW_VIW.Trans Type" value="TRANS_TYPE" />
+		<entry key="REGULAR_VIW_VIW.FNF" value="FNF" />
+		<entry key="REGULAR_VIW_VIW.EMCD" value="EMCD" />
+
+		<entry key="TERRITORY_DETAIL_ASL.Data Marker" value="DATA_MARKER" />
+		<entry key="TERRITORY_DETAIL_ASL.Country" value="COUNTRY" />
+		<entry key="TERRITORY_DETAIL_ASL.Branch" value="BRANCH" />
+		<entry key="TERRITORY_DETAIL_ASL.Territory" value="TERRITORY" />
+		<entry key="TERRITORY_DETAIL_ASL.Out Loc" value="OUT_LOC" />
+		<entry key="TERRITORY_DETAIL_ASL.Serial" value="SERIAL" />
+		<entry key="TERRITORY_DETAIL_ASL.Part Number" value="PART_NUMBER" />
+		<entry key="TERRITORY_DETAIL_ASL.Part Name" value="PART_NAME" />
+		<entry key="TERRITORY_DETAIL_ASL.U/A Age" value="U/A_AGE" />
+		<entry key="TERRITORY_DETAIL_ASL.ASL Qty" value="ASL_QTY" />
+		<entry key="TERRITORY_DETAIL_ASL.Date ASL Set" value="DATE_ASL_SET" />
+		<entry key="TERRITORY_DETAIL_ASL.SPL" value="SPL" />
+		<entry key="TERRITORY_DETAIL_ASL.RSL" value="RSL" />
+		<entry key="TERRITORY_DETAIL_ASL.Date Last Used" value="DATE_LAST_USED" />
+		<entry key="TERRITORY_DETAIL_ASL.Date Last Activity" value="DATE_LAST_ACTIVITY" />
+		<entry key="TERRITORY_DETAIL_ASL.Unit Price" value="UNIT_PRICE" />
+		<entry key="TERRITORY_DETAIL_ASL.ASL M/T" value="ASL_M/T" />
+		<entry key="TERRITORY_DETAIL_ASL.Notepad Text" value="NOTEPAD_TEXT" />
+		<entry key="TERRITORY_DETAIL_ASL.Note Pad Date" value="NOTE_PAD_DATE" />
+
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Country" value="COUNTRY" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Branch" value="BRANCH" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Territory" value="TERRITORY" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Serial" value="SERIAL" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Order Number" value="ORDER_NUMBER" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Quantity" value="QUANTITY" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Processed Date" value="PROCESS_DATE" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Rec B/O" value="REC_B/O" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Rec O/L" value="REC_O/L" />
+		<entry key="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR.Price" value="PRICE" />
+
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Data Marker" value="DATA_MARKER" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Country" value="COUNTRY" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Branch" value="BRANCH" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Territory" value="TERRITORY" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Out Loc" value="OUT_LOC" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Serial" value="SERIAL" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Part Number" value="PART_NUMBER" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Part Name" value="PART_NAME" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.PRF#" value="PRF#" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.CPN#" value="CPN#" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.QSAR Number" value="QSAR_NUMBER" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Machine Type" value="MACHINE_TYPE" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Machine Serial" value="MACHINE_SERIAL" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.APC Code" value="APC_CODE" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.UPR Status" value="UPR_STATUS" />
+		<entry key="WEEKLY_POTENTIAL_RETURNS_UPR.EX" value="EX" />
+
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Country" value="COUNTRY" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Branch" value="BRANCH" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Territory" value="TERRITORY" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Serial" value="SERIAL" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Order Number" value="ORDER_NUMBER" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Quantity" value="QUANTITY" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Process Date" value="PROCESS_DATE" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Receiving B/O" value="RECEIVING_B/O" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Receiving O/L" value="RECEIVING_O/L" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.Unit Price" value="UNIT_PRICE" />
+		<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.SR Serial" value="SR_SERIAL" />
+
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Country" value="COUNTRY" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Branch" value="BRANCH" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Territory" value="TERRITORY" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Serial" value="SERIAL" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Part Name" value="PARTNAME" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Cycle" value="CYCLE" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Rec. Add Qty" value="REC_ADD_QTY" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.RSP" value="RSP" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.RSL" value="RSL" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.ASL" value="ASL" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.QTOH" value="QTQH" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Date Last Demand" value="DATE_LAST_DEMAND" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Date Of Birth" value="DATE_OF_BIRTH" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Internal Value Up" value="INTERNAL_VALUE_UP" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.Machine Type Supported" value="MACHINE_TYPE_SUPPORTED" />
+		<entry key="WEEKLY_RECCOMENDED_ADD_IMR.R/G" value="R/G" />
+
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Country" value="COUNTRY" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Branch" value="BRANCH" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Territory" value="TERRITORY" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Serial" value="SERIAL" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Part Number" value="PARTNUMBER" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Part Name" value="PARTNAME" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Cycle" value="CYCLE" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Rec.Retn Qty" value="REC_RETN_QTY" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.RSP" value="RSP" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.RSL" value="RSL" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.ASL" value="ASL" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.QTOH" value="QTQH" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Date Last Demand" value="DATE_LAST_DEMAND" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Date Of Birth" value="DATE_OF_BIRTH" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Internal Value Up" value="INTERNAL_VALUE_UP" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Machine Type Supported" value="MACHINE_TYPE_SUPPORTED" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Sub Part#" value="SUB_PART#" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.HAZ INDIC" value="HAZ_INDIC" />
+		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.MSDS IND" value="MSDS_IND" />
+    </util:map>
+</beans>

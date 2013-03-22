@@ -14,7 +14,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import services.tman.control.TMTAFileProcessor;
+import services.tman.control.TMANFileProcessor;
 
 /**
  * This class is of type <code>QuartzJobBean</code> 
@@ -27,28 +27,24 @@ import services.tman.control.TMTAFileProcessor;
  */
 public class FlatFileProcessorJob extends QuartzJobBean {
 	private static final Logger logger = Logger.getLogger(FlatFileProcessorJob.class);
-	
-	private TMTAFileProcessor processor;
-	private List<String> directories;
-	private String processedFilesDirectory;
-	private String invalidFilesDirectory;
+	private List<TMANFileProcessor> processors;
 	
 	public FlatFileProcessorJob() { }
 
 	@Override
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
-		for(String directoryName : directories) {
-			File input = new File(directoryName);
-			String []flatFileNames = input.list();
-			
-			for(String flatFileName : flatFileNames) {
-				File flatFile = new File(directoryName + "\\" + flatFileName);
-				if(flatFile.isDirectory()) continue;
-				if(isFileNotYetTransferredCompletely(flatFile)) continue;
+		for(TMANFileProcessor fileProcessor : processors) {
+			for(String directoryName : fileProcessor.getInputDirectories()) {
+				File input = new File(directoryName);
+				String []flatFileNames = input.list();
 				
-				logger.info("Processing: " + flatFile.getName());
-				
-				processTMTAFlatFile(flatFile);
+				for(String flatFileName : flatFileNames) {
+					File flatFile = new File(directoryName + "\\" + flatFileName);
+					if(flatFile.isDirectory()) continue;
+					if(isFileNotYetTransferredCompletely(flatFile)) continue;
+					
+					processTMTAFlatFile(fileProcessor, flatFile);
+				}
 			}
 		}
 	}
@@ -58,31 +54,35 @@ public class FlatFileProcessorJob extends QuartzJobBean {
 		return fileNameSplittedArray[fileNameSplittedArray.length - 1].equals("TMP");
 	}
 
-	private void processTMTAFlatFile(File flatFile) {
-		try {
-			processor.initReader(flatFile);
-			processor.process(flatFile);
-			moveFlatFileToProcessedFilesDirectory(flatFile);
-		} catch (IOException e) {
-			try { moveFlatFileToInvalidFilesDirectory(flatFile);
+	private void processTMTAFlatFile(TMANFileProcessor fileProcessor, File flatFile) {
+		if(fileProcessor.isFlatFileValid(flatFile)) {
+			logger.info("Processing: " + flatFile.getName());
+			
+			try {
+				fileProcessor.initReader(flatFile);
+				fileProcessor.process(flatFile);
+				moveFlatFileToProcessedFilesDirectory(fileProcessor.getProcessedFilesDirectory(), flatFile);
+			} catch (Exception e) {
+				try { moveFlatFileToInvalidFilesDirectory(fileProcessor.getInvalidFilesDirectory(), flatFile);
+				} catch (IOException e1) {}
+				logger.error(e.getMessage());
+			} finally {
+				logger.info("Processing Completed For: " + flatFile.getName());
+				try { fileProcessor.shutdown(); } catch(IOException e){}
+				flatFile.delete();
+			}
+		} else {
+			try { moveFlatFileToInvalidFilesDirectory(fileProcessor.getInvalidFilesDirectory(), flatFile);
 			} catch (IOException e1) {}
-			logger.error(e.getMessage());
-		} catch (Exception e) {
-			try { moveFlatFileToInvalidFilesDirectory(flatFile);
-			} catch (IOException e1) {}
-			logger.error(e.getMessage());
-		} finally {
-			logger.info("Processing Completed For: " + flatFile.getName());
-			flatFile.delete();
 		}
 	}
 	
-	private void moveFlatFileToProcessedFilesDirectory(File flatFile) throws IOException {
-	    moveFlatFileToDestination(flatFile, processedFilesDirectory);
+	private void moveFlatFileToProcessedFilesDirectory(String destination, File flatFile) throws IOException {
+	    moveFlatFileToDestination(flatFile, destination);
 	}
 	
-	private void moveFlatFileToInvalidFilesDirectory(File flatFile) throws IOException {
-		moveFlatFileToDestination(flatFile, invalidFilesDirectory);
+	private void moveFlatFileToInvalidFilesDirectory(String destination, File flatFile) throws IOException {
+		moveFlatFileToDestination(flatFile, destination);
 	}
 
 	private void moveFlatFileToDestination(File flatFile,
@@ -99,19 +99,11 @@ public class FlatFileProcessorJob extends QuartzJobBean {
 	    outStream.close();
 	}
 
-	public void setProcessor(TMTAFileProcessor processor) {
-		this.processor = processor;
+	public List<TMANFileProcessor> getProcessors() {
+		return processors;
 	}
 
-	public void setDirectories(List<String> directories) {
-		this.directories = directories;
-	}
-
-	public void setProcessedFilesDirectory(String processedFilesDirectory) {
-		this.processedFilesDirectory = processedFilesDirectory;
-	}
-
-	public void setInvalidFilesDirectory(String invalidFilesDirectory) {
-		this.invalidFilesDirectory = invalidFilesDirectory;
+	public void setProcessors(List<TMANFileProcessor> processors) {
+		this.processors = processors;
 	}
 }

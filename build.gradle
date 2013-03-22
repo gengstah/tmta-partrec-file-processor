@@ -28,11 +28,15 @@ dependencies {
 	testCompile "junit:junit:4.+"
 	
 	runtime "commons-pool:commons-pool:20030825.183949"
-	runtime "db2jcc_license_cu:db2jcc_license_cu:1.0.0"
-	runtime "db2jcc:db2jcc:1.0.0"
+	runtime files("C:/Program Files/IBM/SQLLIB/java/db2jcc.jar", "C:/Program Files/IBM/SQLLIB/java/db2jcc_license_cu.jar")
 }
 
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
     gradleVersion = '1.4'
+}
+
+task "create-dirs" << {
+   sourceSets*.java.srcDirs*.each { it.mkdirs() }
+   sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
