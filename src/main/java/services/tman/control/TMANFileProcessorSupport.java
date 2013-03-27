@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import services.tman.converter.DataTypeConverter;
 import services.tman.dao.TerritoryManagerDao;
@@ -27,9 +28,10 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 	private TMANFileProcessorUtil util;
 	private String tableName;
 	
-	private List<String> inputDirectories;
-	private String processedFilesDirectory;
-	private String invalidFilesDirectory;
+	private Map<String, String> inputDirectoriesToProcessedFilesDirectories;
+	private Map<String, String> inputDirectoriesToInvalidFilesDirectories;
+	/*private String processedFilesDirectory;
+	private String invalidFilesDirectory;*/
 	
 	public TMANFileProcessorSupport() {
 		columnHeaders = new ArrayList<String>();
@@ -96,33 +98,6 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 	
 	public TMANFileProcessorUtil getUtil() {
 		return util;
-	}
-
-	@Override
-	public String getProcessedFilesDirectory() {
-		return processedFilesDirectory;
-	}
-
-	public void setProcessedFilesDirectory(String processedFilesDirectory) {
-		this.processedFilesDirectory = processedFilesDirectory;
-	}
-
-	@Override
-	public String getInvalidFilesDirectory() {
-		return invalidFilesDirectory;
-	}
-
-	public void setInvalidFilesDirectory(String invalidFilesDirectory) {
-		this.invalidFilesDirectory = invalidFilesDirectory;
-	}
-
-	@Override
-	public List<String> getInputDirectories() {
-		return inputDirectories;
-	}
-
-	public void setInputDirectories(List<String> inputDirectories) {
-		this.inputDirectories = inputDirectories;
 	}
 
 	String getTableName() {
@@ -211,5 +186,25 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 	@Override
 	public void shutdown() throws IOException {
 		reader.close();
+	}
+
+	@Override
+	public Map<String, String> getInputDirectoriesToProcessedFilesDirectories() {
+		return inputDirectoriesToProcessedFilesDirectories;
+	}
+
+	public void setInputDirectoriesToProcessedFilesDirectories(
+			Map<String, String> inputDirectoriesToProcessedFilesDirectories) {
+		this.inputDirectoriesToProcessedFilesDirectories = inputDirectoriesToProcessedFilesDirectories;
+	}
+
+	@Override
+	public Map<String, String> getInputDirectoriesToInvalidFilesDirectories() {
+		return inputDirectoriesToInvalidFilesDirectories;
+	}
+
+	public void setInputDirectoriesToInvalidFilesDirectories(
+			Map<String, String> inputDirectoriesToInvalidFilesDirectories) {
+		this.inputDirectoriesToInvalidFilesDirectories = inputDirectoriesToInvalidFilesDirectories;
 	}
 }

@@ -44,7 +44,12 @@ public class DataTypeConverter {
 		String dataType = dataDictionary.getProperty(key, "String");
 		
 		if(dataType.toUpperCase().equals("LONG")) {
-			numberEditor = new CustomNumberEditor(Long.class, true);
+			if(numberFormatOverrides.containsKey(key)) {
+				numberEditor = new CustomNumberEditor(Long.class, numberFormatOverrides.get(key), true);
+			} else {
+				numberEditor = new CustomNumberEditor(Long.class, true);
+			}
+			
 			numberEditor.setAsText(actualDataValue);
 			return numberEditor.getValue();
 		} else if(dataType.toUpperCase().equals("DOUBLE")) {

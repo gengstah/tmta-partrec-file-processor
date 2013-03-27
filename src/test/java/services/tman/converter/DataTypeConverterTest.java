@@ -53,6 +53,7 @@ public class DataTypeConverterTest {
 		Map<String, NumberFormat> numberFormatOverrides = new HashMap<String, NumberFormat>();
 		numberFormatOverrides.put("MONTHLY_DISB_AND_RETURNS_IMR.PRICE", new DecimalFormat("#,###.###"));
 		numberFormatOverrides.put("BRANCH_MANAGER_SUMMARY_ASL.TOTAL_INV_$", NumberFormat.getCurrencyInstance(Locale.US));
+		numberFormatOverrides.put("REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.TOTAL_NEGATIVE_DOLLARS", new DecimalFormat("#,###.###;#,###.###-"));
 		converter.setNumberFormatOverrides(numberFormatOverrides);
 	}
 	
@@ -72,6 +73,9 @@ public class DataTypeConverterTest {
 				instanceof Double);
 		converter.setTableName("MONTHLY_DISB_AND_RETURNS_IMR").setColumnHeader("PRICE");
 		assertTrue(converter.convert("47,126.06")
+				instanceof Double);
+		converter.setTableName("REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR").setColumnHeader("TOTAL_NEGATIVE_DOLLARS");
+		assertTrue(converter.convert("6.156-")
 				instanceof Double);
 	}
 }

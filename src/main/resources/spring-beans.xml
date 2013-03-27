@@ -35,6 +35,11 @@
     <bean id="jdbcTerritoryManagerDao" class="services.tman.dao.JdbcTerritoryManagerDao">
     	<property name="dataSource" ref="dataSource" />
     	<property name="schemaName" value="TM2STG" />
+    	<property name="ignoreColumns">
+    		<list>
+    			<value>DATA_MARKER</value>
+    		</list>
+    	</property>
     </bean>
     
     <bean id="fileProcessorUtil" class="services.tman.control.TMANFileProcessorUtil" factory-method="getInstance">
@@ -56,29 +61,59 @@
     	</property>
     	<property name="dateEditorOverrides">
     		<map>
-    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMONTHLY_DISB_AND_RETURNS_IMR" />
-    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.PROCESS_DATE" value-ref="customDateEditorOverrideForMONTHLY_DISB_AND_RETURNS_IMR" />
+    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.PROCESS_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_QUANTITY_ADJUSTMENT_IMR.TRANS_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_RECEIPT_ACTIVITY_IMR.PROCESS_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.DATE_LAST_DEMAND" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.DATE_OF_BIRTH" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.DATE_LAST_DEMAND" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.DATE_OF_BIRTH" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_STOCK_STATUS_IMR.DATE_LAST_ACTIVITY" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_STOCK_STATUS_IMR.DATE_LAST_DEMAND" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="MONTHLY_MINUS_ON_HAND_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.PROCESS_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_RECCOMENDED_ADD_IMR.DATE_LAST_DEMAND" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_RECCOMENDED_ADD_IMR.DATE_OF_BIRTH" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.DATE_LAST_DEMAND" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.DATE_OF_BIRTH" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_DISB_AND_RETURNS_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_DISB_AND_RETURNS_IMR.PROCESS_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
+    			<entry key="WEEKLY_MINUS_ON_HAND_IMR.TRANSACTION_DATE" value-ref="customDateEditorOverrideForMMddyyFormat" />
     		</map>
     	</property>
     	<property name="numberFormatOverrides">
     		<map>
-    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.PRICE" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR" />
-    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_TOTALS_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_TOTALS_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="FIELD_MANAGER_SUMMARY_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="FIELD_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />
-    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" />			
+    			<entry key="MONTHLY_DISB_AND_RETURNS_IMR.PRICE" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="WEEKLY_RECEIPT_ACTIVITY_IMR.UNIT_PRICE" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="NBO_VIW_VIW.UNIT_PRICE" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.UNIT_PRICE" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.EXTENDED_PRICE" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.ASL_LINES" value-ref="numberFormatOverrideForLongCustomFormat" />
+    			<entry key="WEEKLY_RECCOMENDED_ADD_IMR.INTERNAL_VALUE_UP" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="MONTHLY_PRICE_CHANGE_IMR.INTERNAL_VALUE_UP" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="MONTHLY_RECCOMENDED_ADDS_IMR.INTERNAL_VALUE_UP" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.INTERNAL_VALUE_UP" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.INTERNAL_VALUE_UP" value-ref="numberFormatOverrideForDoubleCustomFormat" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_SUMMARY_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.ASL_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="BRANCH_MANAGER_TOTALS_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.TOTAL_INV_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.ASL_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_1_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_2_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="FIELD_MANAGER_SUMMARY_ASL.AGED_3_YR_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="REGULAR_ADJUSTMENT_REPORT_DETAIL_RIR.EXCLUDED_FROM_GV_$" value-ref="numberFormatOverrideForCurrencies" />
+    			<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.TOTAL_NEGATIVE_DOLLARS" value-ref="numberFormatOverrideForNegativeDoubleCustomFormat" />
     		</map>
     	</property>
     </bean>
@@ -87,7 +122,7 @@
 		<constructor-arg index="0" value="yyyy-MM-dd" />
 	</bean>
 	
-	<bean id="customDateEditorOverrideForMONTHLY_DISB_AND_RETURNS_IMR" class="org.springframework.beans.propertyeditors.CustomDateEditor">
+	<bean id="customDateEditorOverrideForMMddyyFormat" class="org.springframework.beans.propertyeditors.CustomDateEditor">
 		<constructor-arg index="0">
 			<bean class="java.text.SimpleDateFormat">
 				<constructor-arg index="0" value="MMddyy" />
@@ -96,11 +131,19 @@
 		<constructor-arg index="1" value="true" />
 	</bean>
 	
-	<bean id="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR" class="java.text.DecimalFormat">
+	<bean id="numberFormatOverrideForDoubleCustomFormat" class="java.text.DecimalFormat">
 		<constructor-arg index="0" value="#,###.###" />
 	</bean>
 	
-	<bean id="numberFormatOverrideForMONTHLY_DISB_AND_RETURNS_IMR_Currencies" class="java.text.NumberFormat" factory-method="getCurrencyInstance">
+	<bean id="numberFormatOverrideForNegativeDoubleCustomFormat" class="java.text.DecimalFormat">
+		<constructor-arg index="0" value="#,###.###;#,###.###-" />
+	</bean>
+	
+	<bean id="numberFormatOverrideForLongCustomFormat" class="java.text.DecimalFormat">
+		<constructor-arg index="0" value="#,###" />
+	</bean>
+	
+	<bean id="numberFormatOverrideForCurrencies" class="java.text.NumberFormat" factory-method="getCurrencyInstance">
 		<constructor-arg index="0">
 			<util:constant static-field="java.util.Locale.US"/>
 		</constructor-arg>
@@ -111,13 +154,17 @@
     <bean id="tmtaFileProcessor" class="services.tman.control.TMTAFileProcessor">
     	<property name="dao" ref="jdbcTerritoryManagerDao" />
     	<property name="util" ref="fileProcessorUtil" />
-    	<property name="processedFilesDirectory" value="C:\TM2_TMTA_Files\TMTA_Processed_Files" />
-    	<property name="invalidFilesDirectory" value="C:\TM2_TMTA_Files\TMTA_Invalid_Files" />
-    	<property name="inputDirectories">
-    		<list>
-    			<value>C:\\TMTA_flat_files</value>
-    			<value>C:\\TMTA_Canada_Input</value>
-    		</list>
+    	<property name="inputDirectoriesToProcessedFilesDirectories">
+    		<map>
+    			<entry key="C:\TMTA_flat_files" value="C:\TM2_TMTA_Files\TMTA_Processed_Files" />
+    			<entry key="C:\TMTA_Canada_Input" value="C:\TM2_TMTA_Files\TMTA_Processed_Files" />
+    		</map>
+    	</property>
+    	<property name="inputDirectoriesToInvalidFilesDirectories">
+    		<map>
+    			<entry key="C:\TMTA_flat_files" value="C:\TM2_TMTA_Files\TMTA_Invalid_Files" />
+    			<entry key="C:\TMTA_Canada_Input" value="C:\TM2_TMTA_Files\TMTA_Invalid_Files" />
+    		</map>
     	</property>
     	<property name="dateFormat">
     		<bean class="java.text.SimpleDateFormat">
@@ -130,14 +177,18 @@
     <bean id="partrecFileProcessor" class="services.tman.control.PartRecFileProcessor">
     	<property name="dao" ref="jdbcTerritoryManagerDao" />
     	<property name="util" ref="fileProcessorUtil" />
-    	<property name="processedFilesDirectory" value="C:\TM2_PartRec_Files\PartRec_Processed_Files" />
-    	<property name="invalidFilesDirectory" value="C:\TM2_PartRec_Files\PartRec_Invalid_Files" />
-    	<property name="inputDirectories">
-    		<list>
-    			<value>C:\\PartRec_Input</value>
-    			<value>C:\\PartRec_Canada_Input</value>
-    		</list>
+    	<property name="inputDirectoriesToProcessedFilesDirectories">
+    		<map>
+    			<entry key="C:\PartRec_Input" value="C:\TM2_PartRec_Files\PartRec_Processed_Files" />
+    			<entry key="C:\PartRec_Canada_Input" value="C:\TM2_PartRec_Files\PartRec_Canada_Processed_Files" />
+    		</map>
     	</property>
+    	<property name="inputDirectoriesToInvalidFilesDirectories">
+    		<map>
+    			<entry key="C:\PartRec_Input" value="C:\TM2_PartRec_Files\PartRec_Invalid_Files" />
+    			<entry key="C:\PartRec_Canada_Input" value="C:\TM2_TMTA_Files\PartRec_Canada_Invalid_Files" />
+    		</map>
+    	</property>    	
     	<property name="dateFormat">
     		<bean class="java.text.SimpleDateFormat">
     			<constructor-arg value="MMddyyy" />
@@ -166,7 +217,7 @@
 	
 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="flatFileProcessorJob" />
-		<property name="repeatInterval" value="60000" />
+		<property name="repeatInterval" value="600000" />
 		<property name="startDelay" value="5000" />
 	</bean>
 	

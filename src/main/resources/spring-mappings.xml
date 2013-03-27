@@ -24,10 +24,12 @@
 		<entry key="MONTHLY SUBSTITUTION.IMR" value="MONTHLY_SUBSTITUTION_IMR" />
 		<entry key="MONTHLY PARTS DISPOSITION.IMR" value="MONTHLY_PARTS_DISPOSITION_IMR" />
 		<entry key="MONTHLY MINUS ON HAND.IMR" value="MONTHLY_MINUS_ON_HAND_IMR" />
+		<entry key="MONTHLY MINUS ON HANDS.IMR" value="MONTHLY_MINUS_ON_HAND_IMR" />
 		<entry key="WEEKLY MINUS ON HAND.IMR" value="WEEKLY_MINUS_ON_HAND_IMR" />
+		<entry key="WEEKLY MINUS ON HANDS.IMR" value="WEEKLY_MINUS_ON_HAND_IMR" />
 		<entry key="WEEKLY RECOMMENDED ADDS.IMR" value="WEEKLY_RECCOMENDED_ADD_IMR" />
 		<entry key="WEEKLY RECOMMENDED RETURNS.IMR" value="WEEKLY_RECOMMENDED_RETURNS_IMR" />
-		<entry key="WEEKLY DISBURSEMENTS AND RETURNS.IMR" value="WEEKLY_DISBURSEMENTS_AND_RETURNS_IMR" />
+		<entry key="WEEKLY DISBURSEMENTS AND RETURNS.IMR" value="WEEKLY_DISB_AND_RETURNS_IMR" />
 		<entry key="WEEKLY RECEIPT ACTIVITY.IMR" value="WEEKLY_RECEIPT_ACTIVITY_IMR" />
 		<entry key="MONTHLY AGED RETURNS.UPR" value="MONTHLY_AGED_RETURNS_UPR" />
 		<entry key="MONTHLY ANTICIPATED RETURNS.UPR" value="MONTHLY_ANTICIPATED_RETURNS_UPR" />
@@ -198,8 +200,8 @@
 		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Quantity" value="QUANTITY" />
 		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Transaction Date" value="TRANSACTION_DATE" />
 		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Processed Date" value="PROCESS_DATE" />
-		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Rec B/O" value="&quot;REC_B/O&quot;" />
-		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Rec O/L" value="&quot;REC_O/L&quot;" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Rec B/O" value="REC_B/O" />
+		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Rec O/L" value="REC_O/L" />
 		<entry key="MONTHLY_DISB_AND_RETURNS_IMR.Price" value="PRICE" />
 
 		<entry key="MONTHLY_MACHINE_TYPE_REPORT_IMR.Data Marker" value="DATA_MARKER" />
@@ -341,6 +343,7 @@
 		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Part Name" value="PARTNAME" />
 		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Cycle" value="CYCLE" />
 		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Rec.RETN Qty" value="REC_RETN_QTY" />
 		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.Rec.Retn Qty" value="REC_RETN_QTY" />
 		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.RSP" value="RSP" />
 		<entry key="MONTHLY_RECCOMENDED_RETURNS_IMR.RSL" value="RSL" />
@@ -367,9 +370,11 @@
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Bin Loc" value="BIN_LOC" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Activity Type" value="ACTIVITY_TYPE" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Sub Part Numb" value="SUB_PART_NUMBER" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.Sub Part Number" value="SUB_PART_NUMBER" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.QTOH" value="QTQH" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.QTOO" value="QTOO" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Min Spare" value="MIN_SPARE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.MNSP" value="MIN_SPARE" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.RSL" value="RSL" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.ASL" value="ASL" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Trans. Type" value="TRANS_TYPE" />
@@ -377,9 +382,11 @@
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Date Last Demand" value="DATE_LAST_DEMAND" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Mach Type" value="MACH_TYPE" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Int Value" value="INT_VALUE" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.CANADA F/C" value="INT_VALUE" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.Seq. #" value="SEQ_#" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.HAZ" value="HAZ" />
 		<entry key="MONTHLY_STOCK_STATUS_IMR.MSDS" value="MSDS" />
+		<entry key="MONTHLY_STOCK_STATUS_IMR.WHMIS" value="MSDS" />
 
 		<entry key="MONTHLY_SUBSTITUTION_IMR.Data Marker" value="DATA_MARKER" />
 		<entry key="MONTHLY_SUBSTITUTION_IMR.Country" value="COUNTRY" />
@@ -475,7 +482,7 @@
 		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Positive P/N's" value="TOTAL_POSITIVE_P/N'S" />
 		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Positive Dollars" value="TOTAL_POSITIVE_DOLLARS" />
 		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Gross Variance P/N's" value="TOTAL_GROSS_VARIANCE_P/N'S" />
-		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Gross Variance Dollar Impact" value="TOTAL_GROSS_VARIANCE_DOLLAR_IM" />
+		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Gross Variance Dollar Impact" value="TOTAL_GROSS_VARIANCE_DOLLAR_IMPACT" />
 		<entry key="REGULAR_ADJUSTMENT_REPORT_SUMMARY_RIR.Total Expense Impact" value="TOTAL_EXPENSE_IMPACT" />
 
 		<entry key="REGULAR_COUNTS_PHY.Data Marker" value="DATA_MARKER" />
@@ -646,5 +653,38 @@
 		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.Sub Part#" value="SUB_PART#" />
 		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.HAZ INDIC" value="HAZ_INDIC" />
 		<entry key="WEEKLY_RECOMMENDED_RETURNS_IMR.MSDS IND" value="MSDS_IND" />
+		
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Country" value="COUNTRY" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Branch" value="BRANCH" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Territory" value="TERRITORY" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Serial" value="SERIAL" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Part Name" value="PART_NAME" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Bin Loc" value="BIN_LOC" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.QTOH" value="QTQH" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Total Value" value="TOTAL_VALUE" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Order Number" value="ORDER_NUMBER" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Transaction Identifier" value="TRANSACTION_IDENTIFIER" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Qty" value="QTY" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Receiving B/O" value="RECEIVING_B/O" />
+		<entry key="WEEKLY_MINUS_ON_HAND_IMR.Receiving O/L" value="RECEIVING_O/L" />
+		
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Data Marker" value="DATA_MARKER" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Country" value="COUNTRY" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Branch" value="BRANCH" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Territory" value="TERRITORY" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Out Loc" value="OUT_LOC" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Serial" value="SERIAL" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Order Number" value="ORDER_NUMBER" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Part Number" value="PART_NUMBER" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Quantity" value="QUANTITY" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Transaction Date" value="TRANSACTION_DATE" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Processed Date" value="PROCESS_DATE" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Rec B/O" value="REC_B/O" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Rec O/L" value="REC_O/L" />
+		<entry key="WEEKLY_DISB_AND_RETURNS_IMR.Price" value="PRICE" />
     </util:map>
 </beans>

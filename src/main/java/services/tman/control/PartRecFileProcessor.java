@@ -115,6 +115,7 @@ public class PartRecFileProcessor extends TMANFileProcessorSupport {
 				String []actualDataArray = actualDataRecord.split("¹,¹");
 				int columnHeaderIndex = 0;
 				Map<String, Object> properties = new HashMap<String, Object>();
+				String []convertedColumnHeaderNames = new String[getColumnHeaders().size()];
 				for(String actualDataValue : actualDataArray) {
 					actualDataValue = getUtil().eliminatePartrecQuotes(actualDataValue);
 					String columnHeader = getColumnHeaders().get(columnHeaderIndex);
@@ -125,11 +126,12 @@ public class PartRecFileProcessor extends TMANFileProcessorSupport {
 					
 					if(properties.containsKey(columnHeader)) columnHeader = columnHeader + "1";
 					properties.put(columnHeader, getConverter().convert(actualDataValue.trim()));
+					convertedColumnHeaderNames[columnHeaderIndex] = columnHeader;
 					columnHeaderIndex++;
 				}
 				
 				logger.info("Saving in " + getTableName() + ": " + properties);
-				getDao().addReport(properties, getTableName());
+				getDao().addReport(properties, getTableName(), convertedColumnHeaderNames);
 				getActualDataRecordList().add(actualDataRecord);
 			} else {
 				logger.error("Invalid actual data marker on line " + actualDataLineCounter + " of file (" + file.getName() + "): "
