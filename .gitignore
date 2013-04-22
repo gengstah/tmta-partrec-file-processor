@@ -23,3 +23,5 @@ argfile*
 *.ipr
 *.iws
 out
+*.ucls
+*.png
