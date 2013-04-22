@@ -10,12 +10,11 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 /**
- * The default implementation of the Territory Manager
- * Data Access Object
+ * The default implementation of the {@link services.tman.dao.TerritoryManagerDao}
  * 
  * @author Gerard Delas Armas
  * @version 1.0.0
- * @since March 2013
+ * @see services.tman.dao.TerritoryManagerDao
  */
 public class JdbcTerritoryManagerDao implements TerritoryManagerDao {
 	private DataSource dataSource;
@@ -24,10 +23,20 @@ public class JdbcTerritoryManagerDao implements TerritoryManagerDao {
 	
 	public JdbcTerritoryManagerDao() { }
 	
+	/**
+	 * Set the {@link javax.sql.DataSource}
+	 * 
+	 * @param dataSource The {@link javax.sql.DataSource}
+	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 	
+	/**
+	 * Set the schema name
+	 * 
+	 * @param schemaName The schema name
+	 */
 	public void setSchemaName(String schemaName) {
 		this.schemaName = schemaName;
 	}
@@ -76,10 +85,20 @@ public class JdbcTerritoryManagerDao implements TerritoryManagerDao {
 		return columnNamesList.toArray(new String[columnNamesList.size()]);
 	}
 
+	/**
+	 * Retrieves the list of column names to be ignored
+	 * 
+	 * @return The list of column names to be ignored
+	 */
 	public List<String> getIgnoreColumns() {
 		return ignoreColumns;
 	}
 
+	/**
+	 * Set the list of column names to be ignored
+	 * 
+	 * @param ignoreColumns The list of column names to be ignored
+	 */
 	public void setIgnoreColumns(List<String> ignoreColumns) {
 		this.ignoreColumns = ignoreColumns;
 	}

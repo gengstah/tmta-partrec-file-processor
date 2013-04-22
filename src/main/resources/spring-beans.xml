@@ -24,7 +24,10 @@
     <import resource="spring-mappings.xml" />
 	
 	<!-- JDBC -->
-	<context:property-placeholder location="jdbc.properties"/>
+	<context:property-placeholder location="jdbc.properties, 
+											tmtaFileProcessor-config.properties, 
+											partrecFileProcessor-config.properties, 
+											trigger-schedule.properties"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
@@ -156,14 +159,14 @@
     	<property name="util" ref="fileProcessorUtil" />
     	<property name="inputDirectoriesToProcessedFilesDirectories">
     		<map>
-    			<entry key="C:\TMTA_flat_files" value="C:\TM2_TMTA_Files\TMTA_Processed_Files" />
-    			<entry key="C:\TMTA_Canada_Input" value="C:\TM2_TMTA_Files\TMTA_Processed_Files" />
+    			<entry key="${tmta.inputFile}" value="${tmta.processedFile}" />
+    			<entry key="${tmta.inputFileCanada}" value="${tmta.processedFileCanada}" />
     		</map>
     	</property>
     	<property name="inputDirectoriesToInvalidFilesDirectories">
     		<map>
-    			<entry key="C:\TMTA_flat_files" value="C:\TM2_TMTA_Files\TMTA_Invalid_Files" />
-    			<entry key="C:\TMTA_Canada_Input" value="C:\TM2_TMTA_Files\TMTA_Invalid_Files" />
+    			<entry key="${tmta.inputFile}" value="${tmta.invalidFile}" />
+    			<entry key="${tmta.inputFileCanada}" value="${tmta.invalidFileCanada}" />
     		</map>
     	</property>
     	<property name="dateFormat">
@@ -179,16 +182,16 @@
     	<property name="util" ref="fileProcessorUtil" />
     	<property name="inputDirectoriesToProcessedFilesDirectories">
     		<map>
-    			<entry key="C:\PartRec_Input" value="C:\TM2_PartRec_Files\PartRec_Processed_Files" />
-    			<entry key="C:\PartRec_Canada_Input" value="C:\TM2_PartRec_Files\PartRec_Canada_Processed_Files" />
+    			<entry key="${partrec.inputFile}" value="${partrec.processedFile}" />
+    			<entry key="${partrec.inputFileCanada}" value="${partrec.processedFileCanada}" />
     		</map>
     	</property>
     	<property name="inputDirectoriesToInvalidFilesDirectories">
     		<map>
-    			<entry key="C:\PartRec_Input" value="C:\TM2_PartRec_Files\PartRec_Invalid_Files" />
-    			<entry key="C:\PartRec_Canada_Input" value="C:\TM2_TMTA_Files\PartRec_Canada_Invalid_Files" />
+    			<entry key="${partrec.inputFile}" value="${partrec.invalidFile}" />
+    			<entry key="${partrec.inputFileCanada}" value="${partrec.invalidFileCanada}" />
     		</map>
-    	</property>    	
+    	</property>
     	<property name="dateFormat">
     		<bean class="java.text.SimpleDateFormat">
     			<constructor-arg value="MMddyyy" />
@@ -217,8 +220,8 @@
 	
 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="flatFileProcessorJob" />
-		<property name="repeatInterval" value="600000" />
-		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="${trigger.repeatInterval}" />
+		<property name="startDelay" value="${trigger.startDelay}" />
 	</bean>
 	
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

@@ -7,26 +7,52 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+/**
+ * This class is the implementation class
+ * of {@link services.tman.control.TMANFileProcessor}
+ * for <b>PartRec file reports</b>
+ * 
+ * @author Gerard
+ * @version 1.0.0
+ */
 public class PartRecFileProcessor extends TMANFileProcessorSupport {
 	private static final Logger logger = Logger.getLogger(PartRecFileProcessor.class);
 	private Map<String, Boolean> userActions;
 	private Map<String, String> columnHeaderToColumnNameMapping;
 	private String subReportName;
 	
+	/**
+	 * Default constructor
+	 */
 	public PartRecFileProcessor() { }
 	
+	/**
+	 * Retrieves the sub report name
+	 * 
+	 * @return The sub report name
+	 */
 	public String getSubReportName() {
 		return subReportName;
 	}
 
+	/**
+	 * Set the sub report name
+	 * 
+	 * @param subReportName The sub report name
+	 */
 	public void setSubReportName(String subReportName) {
 		this.subReportName = subReportName;
 	}
-	
+		
 	Map<String, Boolean> getUserActions() {
 		return userActions;
 	}
 	
+	/**
+	 * Set user actions map
+	 * 
+	 * @param userActions user actions map
+	 */
 	public void setUserActions(Map<String, Boolean> userActions) {
 		this.userActions = userActions;
 	}
@@ -35,10 +61,21 @@ public class PartRecFileProcessor extends TMANFileProcessorSupport {
 		userActions.put(userAction, value);
 	}
 	
+	/**
+	 * Retrieves the map for column header to column name mapping
+	 * 
+	 * @return The map for column header to column name mapping
+	 */
 	public Map<String, String> getColumnHeaderToColumnNameMapping() {
 		return columnHeaderToColumnNameMapping;
 	}
 
+	/**
+	 * Set the map for column header to column name mapping
+	 * 
+	 * @param columnHeaderToColumnNameMapping
+	 * The map for column header to column name mapping
+	 */
 	public void setColumnHeaderToColumnNameMapping(
 			Map<String, String> columnHeaderToColumnNameMapping) {
 		this.columnHeaderToColumnNameMapping = columnHeaderToColumnNameMapping;

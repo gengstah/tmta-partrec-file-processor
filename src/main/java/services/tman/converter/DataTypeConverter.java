@@ -28,6 +28,9 @@ public class DataTypeConverter {
 	private String tableName;
 	private String columnHeader;
 	
+	/**
+	 * Default constructor
+	 */
 	public DataTypeConverter() { }
 	
 	/**
@@ -75,48 +78,105 @@ public class DataTypeConverter {
 		return actualDataValue;
 	}
 	
+	/**
+	 * Set the data dictionary {@link java.util.Properties}
+	 * 
+	 * @param dataDictionary The data dictionary {@link java.util.Properties}
+	 */
 	public void setDataDictionary(Properties dataDictionary) {
 		this.dataDictionary = dataDictionary;
 	}
 	
+	/**
+	 * Set the table name
+	 * 
+	 * @param tableName The table name
+	 * @return a {@link DataTypeConverter} instance; returns itself
+	 */
 	public DataTypeConverter setTableName(String tableName) {
 		this.tableName = tableName;
 		return this;
 	}
 	
+	/**
+	 * Set the column header
+	 *  
+	 * @param columnHeader The column header
+	 * @return The {@link DataTypeConverter} instance; returns itself
+	 */
 	public DataTypeConverter setColumnHeader(String columnHeader) {
 		this.columnHeader = columnHeader;
 		return this;
 	}
 
+	/**
+	 * Retrieves the {@link java.text.DateFormat}
+	 * 
+	 * @return The {@link java.text.DateFormat}
+	 */
 	public DateFormat getDateFormat() {
 		return dateFormat;
 	}
 
+	/**
+	 * Set the {@link java.text.DateFormat}
+	 * 
+	 * @param dateFormat The {@link java.text.DateFormat}
+	 */
 	public void setDateFormat(DateFormat dateFormat) {
 		this.dateFormat = dateFormat;
 	}
 
+	/**
+	 * Retrieves the {@link org.springframework.beans.propertyeditors.CustomDateEditor}
+	 * 
+	 * @return The {@link org.springframework.beans.propertyeditors.CustomDateEditor}
+	 */
 	public CustomDateEditor getDateEditor() {
 		return dateEditor;
 	}
 
+	/**
+	 * Set the {@link org.springframework.beans.propertyeditors.CustomDateEditor}
+	 * 
+	 * @param dateEditor The {@link org.springframework.beans.propertyeditors.CustomDateEditor}
+	 */
 	public void setDateEditor(CustomDateEditor dateEditor) {
 		this.dateEditor = dateEditor;
 	}
 
+	/**
+	 * Retrieves the date editor overrides
+	 * 
+	 * @return The date editor overrides
+	 */
 	public Map<String, CustomDateEditor> getDateEditorOverrides() {
 		return dateEditorOverrides;
 	}
 
+	/**
+	 * Set the date editor overrides
+	 * 
+	 * @param dateEditorOverrides The date editor overrides
+	 */
 	public void setDateEditorOverrides(Map<String, CustomDateEditor> dateEditorOverrides) {
 		this.dateEditorOverrides = dateEditorOverrides;
 	}
 
+	/**
+	 * Retrieves the number format overrides
+	 * 
+	 * @return The number format overrides
+	 */
 	public Map<String, NumberFormat> getNumberFormatOverrides() {
 		return numberFormatOverrides;
 	}
 
+	/**
+	 * Set the number format overrides
+	 * 
+	 * @param numberFormatOverrides The number format overrides
+	 */
 	public void setNumberFormatOverrides(Map<String, NumberFormat> numberFormatOverrides) {
 		this.numberFormatOverrides = numberFormatOverrides;
 	}

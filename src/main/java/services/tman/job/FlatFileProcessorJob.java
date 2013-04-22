@@ -29,10 +29,23 @@ public class FlatFileProcessorJob extends QuartzJobBean {
 	private Logger logger = Logger.getLogger(getClass());
 	private List<TMANFileProcessor> processors;
 	
+	/**
+	 * Default constructor
+	 */
 	public FlatFileProcessorJob() { }
 
+	/**
+	 * Execute the actual job. The job data map will already 
+	 * have been applied as bean property values by execute. 
+	 * The contract is exactly the same as for the standard 
+	 * Quartz execute method.
+	 * 
+	 * @param jec The {@link org.quartz.JobExecutionContext}
+	 * @throws JobExecutionException When the application
+	 * encounters a problem with job execution or scheduling
+	 */
 	@Override
-	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
+	protected void executeInternal(JobExecutionContext jec) throws JobExecutionException {
 		for(TMANFileProcessor fileProcessor : processors) {
 			logger = Logger.getLogger(fileProcessor.getClass());
 			for(String directoryName : fileProcessor.getInputDirectoriesToProcessedFilesDirectories().keySet()) {
@@ -101,10 +114,20 @@ public class FlatFileProcessorJob extends QuartzJobBean {
 	    outStream.close();
 	}
 
+	/**
+	 * Retrieves the list of {@link services.tman.control.TMANFileProcessor}
+	 * 
+	 * @return The list of {@link services.tman.control.TMANFileProcessor}
+	 */
 	public List<TMANFileProcessor> getProcessors() {
 		return processors;
 	}
 
+	/**
+	 * Set the list of {@link services.tman.control.TMANFileProcessor}
+	 * 
+	 * @param processors The list of {@link services.tman.control.TMANFileProcessor}
+	 */
 	public void setProcessors(List<TMANFileProcessor> processors) {
 		this.processors = processors;
 	}

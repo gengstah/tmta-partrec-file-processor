@@ -13,6 +13,22 @@ import java.util.Map;
 import services.tman.converter.DataTypeConverter;
 import services.tman.dao.TerritoryManagerDao;
 
+/**
+ * Provides most methods needed by implementations, this support class
+ * also implements most methods in 
+ * {@link services.tman.control.TMANFileProcessor} 
+ * interface.
+ * 
+ * @author Gerard
+ * @version 1.0.0
+ * @see services.tman.control.TMANFileProcessor
+ * @see #initReader(File)
+ * @see #process(File)
+ * @see #isFlatFileValid(File)
+ * @see #getInputDirectoriesToProcessedFilesDirectories()
+ * @see #getInputDirectoriesToInvalidFilesDirectories()
+ * @see #shutdown()
+ */
 public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 	private DateFormat dateFormat;
 	private int columnCount;
@@ -30,47 +46,93 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 	
 	private Map<String, String> inputDirectoriesToProcessedFilesDirectories;
 	private Map<String, String> inputDirectoriesToInvalidFilesDirectories;
-	/*private String processedFilesDirectory;
-	private String invalidFilesDirectory;*/
 	
+	/**
+	 * Default constructor
+	 */
 	public TMANFileProcessorSupport() {
 		columnHeaders = new ArrayList<String>();
 		actualDataRecordList = new ArrayList<String>();
 	}
 	
-	int getColumnCount() {
+	/**
+	 * Retrives the column count
+	 * 
+	 * @return The column count
+	 */
+	protected int getColumnCount() {
 		return columnCount;
 	}
 	
-	void setReportName(String reportName) {
+	/**
+	 * Set the report name
+	 * 
+	 * @param reportName The report name
+	 */
+	protected void setReportName(String reportName) {
 		this.reportName = reportName;
 	}
 	
-	String getReportName() {
+	/**
+	 * Retrieves the report name
+	 * 
+	 * @return The report name
+	 */
+	protected String getReportName() {
 		return reportName;
 	}
 	
-	List<String> getColumnHeaders() {
+	/**
+	 * Retrieves the list of column headers
+	 * 
+	 * @return The list of column headers
+	 */
+	protected List<String> getColumnHeaders() {
 		return columnHeaders;
 	}
 	
-	void setRecordCount(int recordCount) {
+	/**
+	 * Set the record count
+	 * 
+	 * @param recordCount The record count
+	 */
+	protected void setRecordCount(int recordCount) {
 		this.recordCount = recordCount;
 	}
 	
-	int getRecordCount() {
+	/**
+	 * Retrieves the record count
+	 * 
+	 * @return The record count
+	 */
+	protected int getRecordCount() {
 		return recordCount;
 	}
 	
-	List<String> getActualDataRecordList() {
+	/**
+	 * Retrieves the actual data record list
+	 * 
+	 * @return The actual data record list
+	 */
+	protected List<String> getActualDataRecordList() {
 		return actualDataRecordList;
 	}
 	
-	void setReader(BufferedReader reader) {
+	/**
+	 * Set the {@link java.io.BufferedReader}
+	 * 
+	 * @param reader The {@link java.io.BufferedReader}
+	 */
+	protected void setReader(BufferedReader reader) {
 		this.reader = reader;
 	}
 	
-	BufferedReader getReader() {
+	/**
+	 * Retrieves the {@link java.io.BufferedReader}
+	 * 
+	 * @return The {@link java.io.BufferedReader}
+	 */
+	protected BufferedReader getReader() {
 		return reader;
 	}
 	
@@ -83,43 +145,83 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 		this.dao = dao;
 	}
 	
-	TerritoryManagerDao getDao() {
+	/**
+	 * Retrieves the {@link services.tman.dao.TerritoryManagerDao}
+	 * 
+	 * @return The {@link services.tman.dao.TerritoryManagerDao}
+	 */
+	protected TerritoryManagerDao getDao() {
 		return dao;
 	}
 	
 	/**
-	 * Set the utility class
+	 * Set the {@link services.tman.control.TMANFileProcessorUtil}
 	 * 
-	 * @param util The utility that will be used by this class
+	 * @param util The {@link services.tman.control.TMANFileProcessorUtil}
 	 */
 	public void setUtil(TMANFileProcessorUtil util) {
 		this.util = util;
 	}
 	
+	/**
+	 * Retrieves the {@link services.tman.control.TMANFileProcessorUtil}
+	 * 
+	 * @return The {@link services.tman.control.TMANFileProcessorUtil}
+	 */
 	public TMANFileProcessorUtil getUtil() {
 		return util;
 	}
 
-	String getTableName() {
+	/**
+	 * Retrieves the table name
+	 * 
+	 * @return The table name
+	 */
+	protected String getTableName() {
 		return tableName;
 	}
 
+	/**
+	 * Set the table name
+	 * 
+	 * @param tableName The table name
+	 */
 	void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
 
+	/**
+	 * Set the {@link java.text.DateFormat}
+	 * 
+	 * @param dateFormat The {@link java.text.DateFormat}
+	 */
 	public void setDateFormat(DateFormat dateFormat) {
 		this.dateFormat = dateFormat;
 	}
 	
+	/**
+	 * Retrives the {@link java.text.DateFormat}
+	 * 
+	 * @return The {@link java.text.DateFormat}
+	 */
 	public DateFormat getDateFormat() {
 		return dateFormat;
 	}
 
+	/**
+	 * Retrieves the {@link services.tman.converter.DataTypeConverter}
+	 * 
+	 * @return The {@link services.tman.converter.DataTypeConverter}
+	 */
 	public DataTypeConverter getConverter() {
 		return converter;
 	}
 
+	/**
+	 * Set the {@link services.tman.converter.DataTypeConverter}
+	 * 
+	 * @param converter The {@link services.tman.converter.DataTypeConverter}
+	 */
 	public void setConverter(DataTypeConverter converter) {
 		this.converter = converter;
 	}
@@ -132,12 +234,6 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 		return true;
 	}
 
-	/**
-	 * Initialize the file reader with the file that will be processed
-	 * 
-	 * @param file The file that will be processed
-	 * @throws FileNotFoundException
-	 */
 	@Override
 	public void initReader(File file) throws FileNotFoundException {
 		FileReader fileReader = new FileReader(file);
@@ -157,19 +253,41 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 	abstract void processFirstLine(File file) throws IOException;
 	abstract void processReportName(File file) throws IOException;
 	abstract void processColumnHeader(File file) throws IOException;
+	abstract void processActualData(File file) throws IOException;
 	
-	void processColumnCount() throws IOException {
+	/**
+	 * Process the column count variable
+	 * in the {@link java.io.File}
+	 * 
+	 * @throws IOException When application encounters an io error on
+	 * reading the file reports
+	 */
+	protected void processColumnCount() throws IOException {
 		String columnCount = reader.readLine();
 		this.columnCount = util.parseDataCount(columnCount);
 	}
 	
-	boolean isColumnHeaderSizeIsNotEqualToColumnCount() {
+	/**
+	 * Determines whether column header count
+	 * is not equal to column count
+	 * 
+	 * @return true if column header count is not equal
+	 * to column count, otherwise, false
+	 */
+	protected boolean isColumnHeaderSizeIsNotEqualToColumnCount() {
 		return columnHeaders.size() != getColumnCount();
 	}
 	
-	abstract void processActualData(File file) throws IOException;
-	
-	void processRecordCount(File file, String actualDataRecord) throws IOException {
+	/**
+	 * Process the record count of actual data
+	 * variable in the {@link java.io.File}
+	 * 
+	 * @param file The {@link java.io.File} that will be processed
+	 * @param actualDataRecord The actual data record
+	 * @throws IOException When application encounters an io error on
+	 * reading the file reports
+	 */
+	protected void processRecordCount(File file, String actualDataRecord) throws IOException {
 		recordCount = util.parseDataCount(actualDataRecord);
 		if(isActualDataCountEqualToRecordCount()) {
 			reader.close();
@@ -193,6 +311,14 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 		return inputDirectoriesToProcessedFilesDirectories;
 	}
 
+	/**
+	 * Set the map for input directories to processed files
+	 * directories
+	 * 
+	 * @param inputDirectoriesToProcessedFilesDirectories
+	 * The map for input directories to processed files
+	 * directories
+	 */
 	public void setInputDirectoriesToProcessedFilesDirectories(
 			Map<String, String> inputDirectoriesToProcessedFilesDirectories) {
 		this.inputDirectoriesToProcessedFilesDirectories = inputDirectoriesToProcessedFilesDirectories;
@@ -203,6 +329,14 @@ public abstract class TMANFileProcessorSupport implements TMANFileProcessor {
 		return inputDirectoriesToInvalidFilesDirectories;
 	}
 
+	/**
+	 * Set the map for input directories to invalid files
+	 * directories
+	 * 
+	 * @param inputDirectoriesToInvalidFilesDirectories
+	 * The map for input directories to invalid files
+	 * directories
+	 */
 	public void setInputDirectoriesToInvalidFilesDirectories(
 			Map<String, String> inputDirectoriesToInvalidFilesDirectories) {
 		this.inputDirectoriesToInvalidFilesDirectories = inputDirectoriesToInvalidFilesDirectories;

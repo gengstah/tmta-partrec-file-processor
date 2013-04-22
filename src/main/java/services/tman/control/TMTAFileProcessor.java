@@ -8,17 +8,20 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 /**
+ * This class is the implementation class
+ * of {@link services.tman.control.TMANFileProcessor}
+ * for <b>TMTA file reports</b>
  * 
- * Territory Maintenance Territory Analysis (TMTA)
- * 
- * This class is the processor of a TMTA File
- * 
- * @author Gerard Delas Armas
+ * @author Gerard
  * @version 1.0.0
- * @since March 2013
  */
 public class TMTAFileProcessor extends TMANFileProcessorSupport {
 	private static final Logger logger = Logger.getLogger(TMTAFileProcessor.class);
+	
+	/**
+	 * Default constructor
+	 */
+	public TMTAFileProcessor() { }
 	
 	@Override
 	void processFirstLine(File file) throws IOException {

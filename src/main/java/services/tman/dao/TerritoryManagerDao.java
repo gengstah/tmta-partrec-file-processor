@@ -2,6 +2,15 @@ package services.tman.dao;
 
 import java.util.Map;
 
+/**
+ * The main data access object interface
+ * This interface provides methods to
+ * insert actual data to a data store
+ * 
+ * @author Gerard
+ * @version 1.0.0
+ * @see services.tman.dao.JdbcTerritoryManagerDao
+ */
 public interface TerritoryManagerDao {
 	/**
 	 * This method is used for inserting a row of actual data

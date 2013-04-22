@@ -11,26 +11,43 @@ import services.tman.resolver.TMANReportTableNameResolverFactory;
 
 /**
  * This class is a utility class that is utilized by
- * <code>TMTAFileProcessor</code> to help in the
+ * {@link services.tman.control.TMTAFileProcessor} to help in the
  * readability of its code. This class is designed to
  * be a singleton class, hence, this class will have
  * one and only representation.
  * 
  * @author Gerard
  * @version 1.0.0
- * @since March 2013
+ * @see #getInstance()
+ * @see #setTableNameResolverFactory
  */
 public class TMANFileProcessorUtil implements Serializable {
 	private static final long serialVersionUID = -7452219004290345068L;
 	private static final TMANFileProcessorUtil INSTANCE = new TMANFileProcessorUtil();
 	private TMANReportTableNameResolverFactory tableNameResolverFactory;
 	
+	/**
+	 * Private constructor to prevent direct instantiation
+	 * and subclasses
+	 */
 	private TMANFileProcessorUtil() {}
 	
+	/**
+	 * Retrieves the one and only instance of
+	 * {@link services.tman.control.TMANFileProcessorUtil}
+	 * 
+	 * @return The {@link services.tman.control.TMANFileProcessorUtil}
+	 * instance
+	 */
 	public static TMANFileProcessorUtil getInstance() {
 		return INSTANCE;
 	}
 
+	/**
+	 * Set the {@link services.tman.resolver.TMANReportTableNameResolverFactory}
+	 * 
+	 * @param tableNameResolverFactory The {@link services.tman.resolver.TMANReportTableNameResolverFactory}
+	 */
 	public void setTableNameResolverFactory(TMANReportTableNameResolverFactory tableNameResolverFactory) {
 		this.tableNameResolverFactory = tableNameResolverFactory;
 	}
